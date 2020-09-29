@@ -1,26 +1,22 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.sass";
+import { BrowserRouter as Switch, Route } from "react-router-dom";
 
-function App() {
+import { HomePage } from "./components/pages/HomePage";
+import { AuthorizationPage } from "./components/pages/AuthorizationPage";
+import { DreamCardPage } from "./components/pages/DreamCardPage";
+import { CabinetPage } from "./components/pages/CabinetPage";
+import { BenefactorPage } from "./components/pages/BenefactorPage";
+import { MyDreamsPage } from "./components/pages/MyDreamsPage";
+export const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Switch>
+      <Route path="/" exact component={HomePage} />
+      <Route path="/authorization" component={AuthorizationPage} />
+      <Route path="/dreamcard/:id" component={DreamCardPage} />
+      <Route path="/cabinet" component={CabinetPage} />
+      <Route path="/benefactor" component={BenefactorPage} />
+      <Route path="/mydreams" exact component={MyDreamsPage} />
+    </Switch>
   );
-}
-
-export default App;
+};
