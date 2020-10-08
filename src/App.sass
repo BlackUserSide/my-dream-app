@@ -509,6 +509,7 @@ section
     flex-direction: column
     align-items: center
     width: 100%
+    position: relative
     .logo-wrapper   
         h1
             color: #FF007A
@@ -533,7 +534,7 @@ section
                 color: #FF007A
                 span
                     color: #000000
-                    padding: 18px 10px
+                    padding: 32px 25px
                     border: 8px solid #ff007a
                     border-radius: 50%
         a
@@ -668,17 +669,119 @@ section
                 font-size: 24px
             
         
-
+.log-out-btn
+    position: absolute
+    right: 50px
+    top: 0px
+    cursor: pointer
+    &:hover
+        img
+            transform: scale(1.1)
+    img
+        width: 50px
+        height: 50px
+        transition: .3s ease
 
 @keyframes opacityAdd
     0%
         opacity: 0
     100%
         opacity: 1
+.notification-wrapper-system
+    border-radius: 10px
+    margin: 0
+    position: fixed
+    width: 550px
+    top: 50%
+    left: 50%
+    margin-right: -50%
+    transform: translate(-50%, -50%)
+    z-index: 3
+    background-color: #ffffff
+    display: flex
+    flex-direction: column
+    align-items: center
+    animation: opacity .5s ease-in-out forwards
+    animation-delay: .5s
+    opacity: 0
+    padding: 25px 15px
+    text-align: center
+    h3
+        font-size: 18px
+        font-weight: 500
+        color: #FF007A
+.remove-procent
+    border-radius: 10px
+    margin: 0
+    position: fixed
+    width: 550px
+    top: 50%
+    left: 50%
+    margin-right: -50%
+    transform: translate(-50%, -50%)
+    z-index: 3
+    background-color: #ffffff
+    display: flex
+    flex-direction: column
+    align-items: center
+    animation: opacity .5s ease-in-out forwards
+    animation-delay: .5s
+    opacity: 0
+    padding: 25px 15px
+    height: 300px
+    .h3
+        text-align: center
+        font-size: 18px
+        color: #FF007A
+    input
+        width: 80%
+        border-radius: 25px
+        outline: none
+        border: 1px solid #000
+        font-size: 22px
+        padding: 5px 10px
+        display: inline-block
+        margin-bottom: 15px
+    button
+        text-decoration: none
+        font-size: 16px
+        color: #ffffff
+        background: #ff007a
+        padding: 10px 25px
+        border-radius: 25px
+        box-shadow: 0px 4px 16px #FF007A
+        border: none
+        cursor: pointer
+        transition: .5s ease
+        &:hover
+            transform: scale(1.1)
+    .procent-message
+        opacity: 0
+        height: 0%
+        animation: fadeIn 1.5s ease-in-out forwards
+       
+        .procent-description
+            font-size: 16px
+            text-align: center
+            color: #666
+    .err-message-procent
+        font-size: 18px
+        color: #FF007A
+        font-weight: bold
+        
 
-
-
-
+@keyframes fadeIn
+    0%
+        height: 0%
+        opacity: 0
+    50%
+        height: 50%
+        
+    100%
+        height: 100%
+        opacity: 1
+        
+        
 
 
 @media (max-width: 1075px)

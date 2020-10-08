@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Redirect } from "react-router-dom";
-
+import axios from "axios";
 export const LoginForm = (props) => {
   const [loginData, setLoginData] = useState({
     login: "",
@@ -12,7 +12,6 @@ export const LoginForm = (props) => {
   useEffect(() => {
     document.title = "Вход || My Dream";
   }, []);
-  console.log(loginData);
   const loginHandler = (e) => {
     let name = e.currentTarget.name;
     let val = e.currentTarget.value;
@@ -31,30 +30,32 @@ export const LoginForm = (props) => {
   const submitHandler = (e) => {
     e.preventDefault();
     if (loginData.login !== "" && loginData.password !== "") {
-      dataUser.map((e) => {
-        if (e.login === loginData.login && e.password === loginData.password) {
-          const user = {
-            id: e.id,
-            name: e.name,
-            lastName: e.lastName,
-            bgLost: e.bgLost,
-            status: e.status,
-            balance: e.balance,
-          };
-          localStorage.setItem("user", JSON.stringify(user));
-          setLoginData({
-            login: "",
-            password: "",
-            message: "",
-            redirect: true,
-          });
-        } else {
-          setLoginData((prev) => ({
-            ...prev,
-            message: "Логин или пароль не верны",
-          }));
-        }
-      });
+      const url = "http://my-dream-app/test";
+      axios
+        .post(url, {
+          method: "login",
+          login: loginData.login,
+          password: loginData.password,
+        })
+        .then(({ data }) => {
+          if (data.status === "success") {
+            data.data.map((e) => {
+              localStorage.setItem("user", e.id);
+            });
+            setLoginData((prev) => ({
+              ...prev,
+              redirect: true,
+            }));
+          } else {
+            setLoginData((prev) => ({
+              ...prev,
+              message: "Неправильный логин или пароль",
+            }));
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     } else {
       setLoginData((prev) => ({
         ...prev,
@@ -62,28 +63,6 @@ export const LoginForm = (props) => {
       }));
     }
   };
-  const dataUser = [
-    {
-      id: "1",
-      login: "admin",
-      password: "admin",
-      status: "philanthropist",
-      bgLost: "10%",
-      name: "Sergey",
-      lastName: "Nesmeyanov",
-      balance: "0",
-    },
-    {
-      id: "2",
-      login: "admins",
-      password: "admins",
-      status: "dreamer",
-      bgLost: "10%",
-      name: "Sergey",
-      lastName: "Nesmeyanov",
-      balance: "0",
-    },
-  ];
 
   return (
     <>

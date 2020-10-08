@@ -1,19 +1,36 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-
+import axios from "axios";
 export const NavbarBlack = () => {
-  let content = null;
-  const getNameUser = () => {
-    let nameUser = null;
+  const [content, setContent] = useState({
+    status: true,
+    name: "",
+  });
+
+  useEffect(() => {
+    let nameUser = undefined;
+    const url = "http://my-dream-app/test";
     if (localStorage.getItem("user") === null) {
-      content = <Link to="/authorization">Авторизация</Link>;
     } else {
-      let dataUser = JSON.parse(localStorage.getItem("user"));
-      nameUser = dataUser.name;
-      content = <Link to="/cabinet">{nameUser}</Link>;
+      axios
+        .post(url, {
+          method: "getDataUser",
+          id: localStorage.getItem("user"),
+        })
+        .then(({ data }) => {
+          data.data.map((e) => {
+            nameUser = e.name;
+          });
+          setContent({
+            status: false,
+            name: nameUser,
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     }
-  };
-  getNameUser();
+  }, []);
 
   return (
     <nav className="black-navbar">
@@ -27,7 +44,13 @@ export const NavbarBlack = () => {
         <li>
           <Link to="/benefactor">Благотворитель</Link>
         </li>
-        <li>{content}</li>
+        <li>
+          {content.status ? (
+            <Link to="/authorization">Авторизация</Link>
+          ) : (
+            <Link to="/cabinet">{content.name}</Link>
+          )}
+        </li>
       </ul>
     </nav>
   );

@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import backIcon from "../../img/left-arrow.svg";
+import axios from "axios";
 export const RegisterForm = ({ changePage }) => {
   const [registerData, setRegisterData] = useState({
     name: "",
     lastName: "",
     password: "",
     passwordReq: "",
+    mail: "",
     status: "",
     message: "",
   });
@@ -35,6 +37,11 @@ export const RegisterForm = ({ changePage }) => {
         ...prev,
         passwordReq: val,
       }));
+    } else if (name === "mail") {
+      setRegisterData((prev) => ({
+        ...prev,
+        mail: val,
+      }));
     }
   };
   const statusHandler = (status) => {
@@ -45,10 +52,51 @@ export const RegisterForm = ({ changePage }) => {
   };
   const submitHandler = (e) => {
     e.preventDefault();
-    setRegisterData((prev) => ({
-      ...prev,
-      message: "На данный момент регистрация отключена, ожидайте обновлений",
-    }));
+    if (
+      registerData.name !== "" &&
+      registerData.name !== "" &&
+      registerData.lastName !== "" &&
+      registerData.password !== "" &&
+      registerData.mail !== "" &&
+      registerData.status !== ""
+    ) {
+      if (registerData.password !== registerData.passwordReq) {
+        setRegisterData((prev) => ({
+          ...prev,
+          message: "Пароли не совпадают",
+        }));
+      } else {
+        registerSbm();
+      }
+    } else {
+      setRegisterData((prev) => ({
+        ...prev,
+        message: "Заполните пустые поля",
+      }));
+    }
+  };
+  const registerSbm = () => {
+    const url = "http://my-dream-app/test";
+    axios
+      .post(url, {
+        method: "register",
+        mail: registerData.mail,
+        name: registerData.name,
+        lastName: registerData.lastName,
+        password: registerData.password,
+        status: registerData.status,
+      })
+      .then(({ data }) => {
+        if (data.status === "wrong") {
+          setRegisterData((prev) => ({
+            ...prev,
+            message: "Такой пользователь уже существует",
+          }));
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
   return (
     <>
@@ -63,6 +111,12 @@ export const RegisterForm = ({ changePage }) => {
         ) : (
           ""
         )}
+        <input
+          type="text"
+          name="mail"
+          placeholder="E-mail"
+          onChange={(e) => registerHandler(e)}
+        />
         <input
           type="text"
           name="name"

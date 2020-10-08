@@ -8,6 +8,7 @@ import { DreamCardPage } from "./components/pages/DreamCardPage";
 import { CabinetPage } from "./components/pages/CabinetPage";
 import { BenefactorPage } from "./components/pages/BenefactorPage";
 import { MyDreamsPage } from "./components/pages/MyDreamsPage";
+import { DreamsPage } from "./components/pages/DreamsPage";
 export const App = () => {
   return (
     <Switch>
@@ -17,6 +18,7 @@ export const App = () => {
       <Route path="/cabinet" component={CabinetPage} />
       <Route path="/benefactor" component={BenefactorPage} />
       <Route path="/mydreams" exact component={MyDreamsPage} />
+      <Route path="/dreams" component={DreamsPage} />
     </Switch>
   );
 };
