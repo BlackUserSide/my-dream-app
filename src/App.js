@@ -9,6 +9,8 @@ import { CabinetPage } from "./components/pages/CabinetPage";
 import { BenefactorPage } from "./components/pages/BenefactorPage";
 import { MyDreamsPage } from "./components/pages/MyDreamsPage";
 import { DreamsPage } from "./components/pages/DreamsPage";
+import { useEffect } from "react";
+import axios from "axios";
 export const App = () => {
   return (
     <Switch>

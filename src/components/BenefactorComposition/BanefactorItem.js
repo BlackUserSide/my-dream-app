@@ -1,5 +1,5 @@
 import React from "react";
-import avatar from "../../img/avatars/1.png";
+import avatar from "../../img/dream/3.png";
 export const BanefactorItem = ({ content }) => {
   return (
     <div className="banifactor-tem">

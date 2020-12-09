@@ -710,6 +710,83 @@ section
         font-size: 18px
         font-weight: 500
         color: #FF007A
+.change-avatar-form
+    border-radius: 10px
+    margin: 0
+    position: fixed
+    width: 550px
+    top: 50%
+    left: 50%
+    margin-right: -50%
+    transform: translate(-50%, -50%)
+    z-index: 3
+    background-color: #ffffff
+    display: flex
+    flex-direction: column
+    align-items: center
+    animation: opacity .5s ease-in-out forwards
+    animation-delay: .5s
+    opacity: 0
+    padding: 25px 15px
+    height: 300px
+    
+    .add-btn
+        background: url(./img/add.svg)
+        width: 80px
+        height: 80px
+        background-size: cover
+        position: absolute
+        top: 50%
+        left: 50%
+        margin-right: -50%
+        transform: translate(-50%, -50%)
+        cursor: pointer
+        
+    input
+        
+        display: none
+    button
+        text-decoration: none
+        font-size: 16px
+        color: #ffffff
+        background: #ff007a
+        padding: 10px 25px
+        border-radius: 25px
+        box-shadow: 0px 4px 16px #FF007A
+        border: none
+        cursor: pointer
+        transition: .5s ease
+        &:hover
+            transform: scale(1.1)
+.cropper-area
+    border-radius: 10px
+    margin: 0
+    position: absolute
+    top: 50%
+    left: 50%
+    margin-right: -50%
+    transform: translate(-50%, -50%)
+    z-index: 3
+    background-color: #ffffff
+    display: flex
+    flex-direction: column
+    align-items: center
+    animation: opacity .5s ease-in-out forwards
+    animation-delay: .5s
+    opacity: 0
+    padding: 25px 15px
+    img
+        
+    
+    .preview-avatar
+        display: flex
+        flex-direction: column
+        align-items: center
+        canvas
+            
+            
+    
+        
 .remove-procent
     border-radius: 10px
     margin: 0
